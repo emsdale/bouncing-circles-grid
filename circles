@@ -1,0 +1,48 @@
+var circles = [];
+
+function setup() {
+    createCanvas(500, 500);
+    for (var a = 50; a < width - 300; a += 20) {
+        for (var b = 50; b < height - 300; b += 20) {
+            circles.push(new Circle(a, b));
+        }
+    }
+}
+
+function draw() {
+    background('#FFC107');
+    for (var b = 0; b < circles.length; b++) {
+        circles[b].show();
+    }
+}
+    
+function Circle(x, y) {
+    this.x = x;
+    this.y = y;
+    this.dx = 1;
+    this.dy = 1
+
+    this.show = function() {
+        fill('red');
+        noStroke();
+        ellipse(this.x, this.y, 10, 10);
+
+        this.x += this.dx
+        this.y += this.dy
+
+        if (this.x < 51 || this.y < 51) {
+            this.dx = 1
+            this.dy = 1
+        } 
+        if (this.x > 430 || this.y > 430) {
+            this.dx = -1
+            this.dy = -1
+        }
+    }
+}
+// 📸 Save a png of our canvas whenever we press the key 's'
+function keyTyped() {
+  if (key == 's') {
+    saveCanvas('photo', 'png');
+  }
+}
